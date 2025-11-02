@@ -22,6 +22,7 @@ import {
 } from 'react-native-safe-area-context';
 import './i18n';
 import { useTranslation } from 'react-i18next';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -41,13 +42,47 @@ function App() {
   );
 }
 
+function getIconName(routeName: string) {
+  if (routeName === 'Home') return 'home';
+  if (routeName === 'Agents') return 'smart_toy';
+  if (routeName === 'Store') return 'storefront';
+  if (routeName === 'Me') return 'person';
+  return 'home';
+}
+
+function TabBarIcon({
+  name,
+  color,
+  size,
+}: {
+  name: string;
+  color: string;
+  size: number;
+}) {
+  return <MaterialIcons name={name} size={size} color={color} />;
+}
+
 function AppContent() {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
 
   return (
     <View style={[styles.container, { paddingBottom: insets.bottom }]}>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      {/* eslint-disable react/no-unstable-nested-components */}
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <TabBarIcon
+              name={getIconName(route.name)}
+              color={color}
+              size={size}
+            />
+          ),
+          tabBarActiveTintColor: '#f2df0d',
+          tabBarInactiveTintColor: '#666',
+        })}
+      >
         <Tab.Screen
           name="Home"
           component={Home}
@@ -69,6 +104,7 @@ function AppContent() {
           options={{ tabBarLabel: t('Me') }}
         />
       </Tab.Navigator>
+      {/* eslint-enable react/no-unstable-nested-components */}
     </View>
   );
 }
