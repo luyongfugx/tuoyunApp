@@ -13,7 +13,14 @@
     "react": "19.1.1",
     "react-native": "0.82.1",
     "@react-native/new-app-screen": "0.82.1",
-    "react-native-safe-area-context": "^5.5.2"
+    "react-native-safe-area-context": "^5.5.2",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "react-native-screens": "^3.22.0",
+    "react-native-gesture-handler": "^2.9.0",
+    "react-native-reanimated": "^3.5.0",
+    "i18next": "^23.0.0",
+    "react-i18next": "^12.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
